@@ -1,0 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", "Noto Sans JP", sans-serif;
+  --font-japanese: "Noto Sans JP", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+}
+
+.jp-text {
+  font-family: var(--font-japanese);
+}
