@@ -10,9 +10,6 @@ const vi = {
         password: 'Mật khẩu',
         rememberMe: 'Ghi nhớ đăng nhập',
         forgotPassword: 'Quên mật khẩu?',
-        orContinueWith: 'Hoặc đăng nhập bằng',
-        google: 'Google',
-        github: 'GitHub',
     },
 
     login: {
@@ -23,9 +20,8 @@ const vi = {
         emailRequired: 'Vui lòng nhập email',
         emailInvalid: 'Email không hợp lệ',
         passwordRequired: 'Vui lòng nhập mật khẩu',
-        loginPending: 'Chức năng đăng nhập đang được phát triển',
-        googlePending: 'Google Login chưa được kết nối',
-        githubPending: 'GitHub Login chưa được kết nối',
+        loginSuccess: 'Đăng nhập thành công!',
+        loginFailed: 'Đăng nhập thất bại. Vui lòng kiểm tra email hoặc mật khẩu!',
     },
 
     register: {
@@ -45,12 +41,6 @@ const vi = {
         confirmPasswordRequired: 'Vui lòng xác nhận mật khẩu!',
         passwordMismatch: 'Mật khẩu xác nhận không khớp!',
 
-        agreeTo: 'Tôi đồng ý với',
-        termsOfService: 'Điều khoản sử dụng',
-        and: 'và',
-        privacyPolicy: 'Chính sách bảo mật',
-        termsRequired: 'Bạn cần đồng ý với các điều khoản!',
-
         submit: 'Đăng ký tài khoản',
         alreadyHaveAccount: 'Bạn đã có tài khoản?',
         loginNow: 'Đăng nhập ngay',
@@ -59,6 +49,94 @@ const vi = {
         registerSuccess: 'Đăng ký tài khoản thành công!',
         registerFailed: 'Đăng ký thất bại. Vui lòng thử lại!',
         emailConfirmation: 'Vui lòng kiểm tra email để xác nhận tài khoản.',
+    },
+    hero: {
+        badge: 'HỌC TIẾNG NHẬT MỖI NGÀY',
+        title: 'JLPT Vocabulary Flashcards',
+        description:
+            'Lật thẻ, ghi nhớ từ mới và ôn lại những từ bạn chưa thuộc. Học theo cách của riêng bạn!',
+        imageAlt: 'Japanese Torii Gate',
+    },
+
+    levelAndMode: {
+        selectLevel: 'Chọn cấp độ JLPT',
+        levels: ['N5', 'N4', 'N3', 'N2', 'N1'],
+        learnAll: 'Học tất cả',
+        reviewUnknown: 'Ôn từ chưa thuộc',
+        vocabularyCount: 'từ vựng',
+        unknownCount: 'từ cần ôn',
+    },
+
+    stats: {
+        totalVocabulary: 'Tổng từ vựng',
+        knownWords: 'Đã thuộc',
+        unknownWords: 'Cần ôn lại',
+    },
+
+    mainGrid: {
+        // Progress heading
+        studyTitle: 'Bắt đầu học từ vựng',
+        reviewTitle: 'Ôn tập từ chưa thuộc',
+        card: 'Thẻ',
+        level: 'Cấp độ',
+        shuffle: 'Trộn thẻ',
+
+        // Flashcard
+        flipCard: 'Lật flashcard',
+        frontSide: 'MẶT TRƯỚC · TIẾNG NHẬT',
+        backSide: 'MẶT SAU · Ý NGHĨA',
+        flipHint: 'Nhấn vào thẻ để lật',
+        listenPronunciation: 'Nghe phát âm',
+
+        // Empty state
+        reviewCompleted: 'Bạn đã ôn hết từ chưa thuộc!',
+        noVocabulary: 'Chưa có từ vựng',
+        continueLearning: 'Hãy tiếp tục học từ mới nhé.',
+        selectAnotherLevel: 'Hãy chọn cấp độ khác.',
+        learnAll: 'Học tất cả',
+
+        // Flashcard actions
+        unknown: 'Chưa thuộc',
+        known: 'Đã thuộc',
+        previous: 'Trước',
+        next: 'Tiếp',
+        keyboardHint: 'Space để lật · ← → chuyển thẻ',
+
+        // Unknown words panel
+        unknownWordsTitle: 'Từ chưa thuộc',
+        removeFromList: 'Xóa khỏi danh sách',
+        noUnknownWords: 'Chưa có từ cần ôn',
+        addUnknownHint: 'Đánh dấu "Chưa thuộc" để thêm từ.',
+        reviewNow: 'Ôn tập ngay',
+
+        // Learning tips
+        learningTipTitle: 'Mẹo học nhanh',
+        learningTipDescription:
+            'Hãy thử nhớ nghĩa trước khi lật thẻ. Những từ chưa thuộc sẽ được đưa vào danh sách ôn tập riêng.',
+        learningTipEmoji: '🐱',
+
+        // Memory progress
+        memoryStatus: 'Tình trạng ghi nhớ',
+        knownWordsCount: 'từ đã thuộc',
+    },
+
+    sidebar: {
+        appName: 'NihongoHub',
+        tagline: '日本語を楽しく学ぼう',
+        sectionTitle: 'Học tập',
+        featureComingSoon: 'Tính năng sẽ phát triển sau.',
+        dailyWordTitle: 'Một từ mỗi ngày',
+        dailyWordDescription: 'Học đều đặn sẽ giúp bạn ghi nhớ tốt hơn!',
+        userAvatar: 'H',
+        userAccount: 'Tài khoản học viên',
+        userStatus: 'Đang học JLPT',
+    },
+
+    topBar: {
+        sectionTitle: 'Học tập',
+        currentPage: 'Flashcard',
+        userAvatar: 'H',
+        userRole: 'Học viên',
     },
 };
 

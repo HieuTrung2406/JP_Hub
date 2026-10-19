@@ -114,7 +114,7 @@ const shuffleArray = array => {
 };
 
 export default function Home() {
-    const [selectedLevel, setSelectedLevel] = useState('N3');
+    const [selectedLevel, setSelectedLevel] = useState('N5');
     const [mode, setMode] = useState('all');
     const [index, setIndex] = useState(0);
     const [flipped, setFlipped] = useState(false);

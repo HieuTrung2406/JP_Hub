@@ -3,27 +3,21 @@ import { Form, Input, Button, Checkbox, message } from 'antd';
 import { MailOutlined, LockOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import vi from '../../locales/vi';
 import { loginUser } from '../../services/authService';
+import loginBg from '../../assets/login.png';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async values => {
         try {
             setLoading(true);
-
-            const data = await loginUser(values.email, values.password);
-
-            message.success('Đăng nhập thành công!');
-
-            console.log(data);
-            console.log('USER:', data.user);
-            console.log('SESSION:', data.session);
-            console.log('USER ID:', data.user.id);
-
-            // Tạm thời chưa chuyển trang để test
+            await loginUser(values.email, values.password);
+            message.success(vi.login.loginSuccess);
+            navigate('/home', { replace: true });
         } catch (error) {
-            console.error('Login error:', error);
-            message.error(error.message || 'Đăng nhập thất bại!');
+            message.error(error.message || vi.login.loginFailed);
         } finally {
             setLoading(false);
         }
@@ -35,7 +29,7 @@ export default function Login() {
                 {/* LEFT: JAPANESE ILLUSTRATION */}
                 <section className="relative hidden w-1/2 overflow-hidden bg-blue-50 lg:block">
                     <img
-                        src="https://i.imgur.com/dPlYzub.jpeg"
+                        src={loginBg}
                         alt="Nihongo-hub Japanese learning"
                         className="h-full w-full object-fill"
                     />
@@ -43,19 +37,8 @@ export default function Login() {
 
                 {/* RIGHT: LOGIN FORM */}
                 <section className="flex w-full flex-col bg-white px-6 py-8 sm:px-12 lg:w-1/2 lg:px-16 xl:px-24">
-                    {/* REGISTER TOP */}
-                    <div className="text-right text-sm text-slate-500">
-                        {vi.common.registerPrompt}{' '}
-                        <a
-                            href="/register"
-                            className="font-semibold text-blue-600 hover:text-blue-700"
-                        >
-                            {vi.common.register}
-                        </a>
-                    </div>
-
                     {/* MOBILE BRAND */}
-                    <div className="mt-10 text-center lg:hidden">
+                    <div className="mt-6 text-center lg:hidden">
                         <h1 className="text-3xl font-bold text-slate-900">
                             Nihongo
                             <span className="text-blue-500">-hub</span>
@@ -147,20 +130,14 @@ export default function Login() {
                         </Form>
 
                         {/* DIVIDER */}
-                        <div className="my-9 flex items-center gap-4">
-                            <div className="h-px flex-1 bg-slate-200" />
-                            <span className="whitespace-nowrap text-sm text-slate-400">
-                                {vi.common.orContinueWith}
-                            </span>
-                            <div className="h-px flex-1 bg-slate-200" />
-                        </div>
+                        <div className="my-9 h-px w-full bg-slate-200" />
 
                         {/* REGISTER BOTTOM */}
                         <div className="mt-14 text-center text-sm text-slate-500">
                             {vi.common.registerPrompt}{' '}
-                            <a href="/register" className="font-semibold text-blue-600">
+                            <NavLink to="/register" className="font-semibold text-blue-600">
                                 {vi.common.registerNow}
-                            </a>
+                            </NavLink>
                         </div>
                     </div>
                 </section>

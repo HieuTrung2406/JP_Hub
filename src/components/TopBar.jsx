@@ -1,5 +1,6 @@
 import { Avatar } from 'antd';
 import { LuMenu, LuHouse, LuChevronRight } from 'react-icons/lu';
+import vi from '../locales/vi';
 
 export default function TopBar({ setMobileMenu }) {
     return (
@@ -11,17 +12,23 @@ export default function TopBar({ setMobileMenu }) {
                 >
                     <LuMenu size={23} />
                 </button>
+
                 <LuHouse size={14} />
                 <LuChevronRight size={13} />
-                <span>Học tập</span>
+
+                <span>{vi.topBar.sectionTitle}</span>
+
                 <LuChevronRight size={13} />
-                <span className="font-semibold text-[#376ff0]">Flashcard</span>
+
+                <span className="font-semibold text-[#376ff0]">{vi.topBar.currentPage}</span>
             </div>
+
             <div className="flex items-center gap-2 rounded-full border border-slate-100 bg-white px-3 py-1.5 shadow-sm">
                 <Avatar size={27} className="!bg-[#e6edff] !text-[#3266d5]">
-                    H
+                    {vi.topBar.userAvatar}
                 </Avatar>
-                <span className="text-xs font-semibold text-slate-700">Học viên</span>
+
+                <span className="text-xs font-semibold text-slate-700">{vi.topBar.userRole}</span>
             </div>
         </div>
     );

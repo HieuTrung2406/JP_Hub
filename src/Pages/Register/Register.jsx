@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, MailOutlined, LockOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import vi from '../../locales/vi';
 import { registerUser } from '../../services/authService';
+import registerBg from '../../assets/register.png';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleRegister = async values => {
         setLoading(true);
@@ -18,6 +21,7 @@ export default function Register() {
             } else {
                 message.success(vi.register.emailConfirmation);
             }
+            navigate('/', { replace: true });
         } catch (error) {
             console.error('Register failed:', error.message);
             message.error(error.message || vi.register.registerFailed);
@@ -32,7 +36,7 @@ export default function Register() {
                 {/* LEFT: JAPANESE ILLUSTRATION */}
                 <section className="relative hidden w-1/2 overflow-hidden bg-blue-50 lg:block">
                     <img
-                        src="https://i.imgur.com/dPlYzub.jpeg"
+                        src={registerBg}
                         alt="Nihongo-hub Japanese learning"
                         className="h-full w-full object-fill"
                     />
@@ -43,12 +47,9 @@ export default function Register() {
                     {/* LOGIN TOP */}
                     <div className="text-right text-sm text-slate-500">
                         {vi.register.alreadyHaveAccount}{' '}
-                        <a
-                            href="/login"
-                            className="font-semibold text-blue-600 hover:text-blue-700"
-                        >
+                        <NavLink to="/" className="font-semibold text-blue-600 hover:text-blue-700">
                             {vi.register.loginNow}
-                        </a>
+                        </NavLink>
                     </div>
 
                     {/* MOBILE BRAND */}
@@ -78,7 +79,6 @@ export default function Register() {
                             size="large"
                             onFinish={handleRegister}
                             requiredMark={false}
-                            initialValues={{ agreeTerms: false }}
                         >
                             {/* FULL NAME */}
                             <Form.Item
@@ -173,35 +173,6 @@ export default function Register() {
                                 />
                             </Form.Item>
 
-                            {/* TERMS */}
-                            <Form.Item
-                                name="agreeTerms"
-                                valuePropName="checked"
-                                rules={[
-                                    {
-                                        validator: (_, value) =>
-                                            value
-                                                ? Promise.resolve()
-                                                : Promise.reject(
-                                                      new Error(vi.register.termsRequired)
-                                                  ),
-                                    },
-                                ]}
-                            >
-                                <Checkbox>
-                                    <span className="text-sm text-slate-500">
-                                        {vi.register.agreeTo}{' '}
-                                        <a href="/terms" className="font-medium text-blue-600">
-                                            {vi.register.termsOfService}
-                                        </a>{' '}
-                                        {vi.register.and}{' '}
-                                        <a href="/privacy" className="font-medium text-blue-600">
-                                            {vi.register.privacyPolicy}
-                                        </a>
-                                    </span>
-                                </Checkbox>
-                            </Form.Item>
-
                             {/* SUBMIT BUTTON */}
                             <Form.Item className="!mb-0">
                                 <Button
@@ -216,14 +187,6 @@ export default function Register() {
                                 </Button>
                             </Form.Item>
                         </Form>
-
-                        {/* LOGIN BOTTOM */}
-                        <div className="mt-8 text-center text-sm text-slate-500">
-                            {vi.register.alreadyHaveAccount}{' '}
-                            <a href="/login" className="font-semibold text-blue-600">
-                                {vi.register.loginNow}
-                            </a>
-                        </div>
                     </div>
                 </section>
             </div>
