@@ -27,12 +27,10 @@ const vi = {
     register: {
         title: 'Tạo tài khoản',
         subtitle: 'Bắt đầu hành trình chinh phục tiếng Nhật cùng Nihongo-hub ngay hôm nay.',
-
         fullName: 'Họ và tên',
         email: 'Địa chỉ email',
         password: 'Mật khẩu',
         confirmPassword: 'Xác nhận mật khẩu',
-
         fullNameRequired: 'Vui lòng nhập họ và tên!',
         emailRequired: 'Vui lòng nhập email!',
         emailInvalid: 'Địa chỉ email không hợp lệ!',
@@ -40,16 +38,15 @@ const vi = {
         passwordMinLength: 'Mật khẩu phải có ít nhất 8 ký tự!',
         confirmPasswordRequired: 'Vui lòng xác nhận mật khẩu!',
         passwordMismatch: 'Mật khẩu xác nhận không khớp!',
-
         submit: 'Đăng ký tài khoản',
         alreadyHaveAccount: 'Bạn đã có tài khoản?',
         loginNow: 'Đăng nhập ngay',
-
         registerPending: 'Chức năng đăng ký đang được phát triển.',
         registerSuccess: 'Đăng ký tài khoản thành công!',
         registerFailed: 'Đăng ký thất bại. Vui lòng thử lại!',
         emailConfirmation: 'Vui lòng kiểm tra email để xác nhận tài khoản.',
     },
+
     hero: {
         badge: 'HỌC TIẾNG NHẬT MỖI NGÀY',
         title: 'JLPT Vocabulary Flashcards',
@@ -74,48 +71,35 @@ const vi = {
     },
 
     mainGrid: {
-        // Progress heading
         studyTitle: 'Bắt đầu học từ vựng',
         reviewTitle: 'Ôn tập từ chưa thuộc',
         card: 'Thẻ',
         level: 'Cấp độ',
         shuffle: 'Trộn thẻ',
-
-        // Flashcard
         flipCard: 'Lật flashcard',
         frontSide: 'MẶT TRƯỚC · TIẾNG NHẬT',
         backSide: 'MẶT SAU · Ý NGHĨA',
         flipHint: 'Nhấn vào thẻ để lật',
         listenPronunciation: 'Nghe phát âm',
-
-        // Empty state
         reviewCompleted: 'Bạn đã ôn hết từ chưa thuộc!',
         noVocabulary: 'Chưa có từ vựng',
         continueLearning: 'Hãy tiếp tục học từ mới nhé.',
         selectAnotherLevel: 'Hãy chọn cấp độ khác.',
         learnAll: 'Học tất cả',
-
-        // Flashcard actions
         unknown: 'Chưa thuộc',
         known: 'Đã thuộc',
         previous: 'Trước',
         next: 'Tiếp',
         keyboardHint: 'Space để lật · ← → chuyển thẻ',
-
-        // Unknown words panel
         unknownWordsTitle: 'Từ chưa thuộc',
         removeFromList: 'Xóa khỏi danh sách',
         noUnknownWords: 'Chưa có từ cần ôn',
         addUnknownHint: 'Đánh dấu "Chưa thuộc" để thêm từ.',
         reviewNow: 'Ôn tập ngay',
-
-        // Learning tips
         learningTipTitle: 'Mẹo học nhanh',
         learningTipDescription:
             'Hãy thử nhớ nghĩa trước khi lật thẻ. Những từ chưa thuộc sẽ được đưa vào danh sách ôn tập riêng.',
         learningTipEmoji: '🐱',
-
-        // Memory progress
         memoryStatus: 'Tình trạng ghi nhớ',
         knownWordsCount: 'từ đã thuộc',
     },
