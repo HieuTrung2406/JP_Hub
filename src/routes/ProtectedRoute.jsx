@@ -16,7 +16,7 @@ const ProtectedRoute = () => {
 
     // Chưa đăng nhập
     if (!user) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     // Đã đăng nhập

@@ -121,6 +121,10 @@ const vi = {
         currentPage: 'Flashcard',
         userAvatar: 'H',
         userRole: 'Học viên',
+        accountManagement: 'Quản lý tài khoản',
+        logout: 'Đăng xuất',
+        logoutSuccess: 'Đăng xuất thành công!',
+        logoutFailed: 'Đăng xuất thất bại. Vui lòng thử lại!',
     },
 };
 

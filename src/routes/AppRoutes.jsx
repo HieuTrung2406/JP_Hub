@@ -6,26 +6,27 @@ import Home from '../Pages/Home/Home';
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 import MainLayout from '../components/MainLayout';
-import PageTest from '../Pages/PageTest/PageTest';
+import Account from '../Pages/Account/Account';
 
 const AppRoutes = () => {
     return (
         <Routes>
             {/* PUBLIC ROUTES - chỉ dành cho người chưa login */}
-            <Route element={<PublicRoute />}></Route>
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route element={<PublicRoute />}>
+                <Route path="/" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Route>
 
             {/* PROTECTED ROUTES - yêu cầu login */}
             <Route element={<ProtectedRoute />}>
                 <Route element={<MainLayout />}>
-                    <Route path="/test" element={<PageTest />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/account" element={<Account />} />
                 </Route>
             </Route>
 
             {/* Trang không tồn tại */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
         </Routes>
     );
 };
