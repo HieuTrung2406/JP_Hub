@@ -107,12 +107,9 @@ export default function Login() {
                                     <Checkbox>{vi.common.rememberMe}</Checkbox>
                                 </Form.Item>
 
-                                <a
-                                    href="/forgot-password"
-                                    className="text-sm font-medium text-blue-600"
-                                >
+                                <NavLink to="/" className="text-sm font-medium text-blue-600">
                                     {vi.common.forgotPassword}
-                                </a>
+                                </NavLink>
                             </div>
 
                             <Form.Item className="!mb-0">
