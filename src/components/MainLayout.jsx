@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
-import { LuPanelLeftOpen, LuPanelLeftClose } from 'react-icons/lu';
-
-import SidebarContent from './Sidebar';
 import TopBar from './TopBar';
 import Sidebar from './Sidebar';
 

@@ -225,28 +225,6 @@ export default function Home() {
         window.speechSynthesis.speak(utterance);
     };
 
-    // useEffect(() => {
-    //     const onKeyDown = e => {
-    //         if (
-    //             e.target instanceof HTMLElement &&
-    //             (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
-    //                 e.target.isContentEditable)
-    //         )
-    //             return;
-
-    //         if (e.code === 'Space') {
-    //             e.preventDefault();
-    //             setFlipped(v => !v);
-    //         } else if (e.code === 'ArrowRight') {
-    //             next();
-    //         } else if (e.code === 'ArrowLeft') {
-    //             previous();
-    //         }
-    //     };
-    //     window.addEventListener('keydown', onKeyDown);
-    //     return () => window.removeEventListener('keydown', onKeyDown);
-    // });
-
     useEffect(() => {
         let active = true;
 
