@@ -1,39 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Avatar, Button, Input, Tooltip, Empty, message } from 'antd';
-import {
-    LuBookOpen,
-    LuFileQuestion,
-    LuPencil,
-    LuMessagesSquare,
-    LuMessageCircle,
-    LuPlus,
-    LuSend,
-    LuBot,
-    LuCopy,
-    LuThumbsUp,
-    LuThumbsDown,
-    LuEllipsisVertical,
-    LuTrash2,
-    LuSparkles,
-    LuChevronRight,
-} from 'react-icons/lu';
+import { message } from 'antd';
+import { LuBookOpen, LuFileQuestion, LuPencil, LuMessagesSquare } from 'react-icons/lu';
 
 // Thay bằng đường dẫn ảnh trong project của bạn
-import senseiAvatar from '../../assets/sensei-avatar.png';
 import ChatInput from '../../components/ChatInput';
 import StudyModes from '../../components/StudyModes';
 import ChatHistory from '../../components/ChatHistory';
 import ChatMessages from '../../components/ChatMessages';
-import { askAiSensei } from '../../services/aiSenseiService';
+import {
+    askAiSensei,
+    createChat,
+    deleteChat,
+    getChatMessages,
+    saveMessage,
+} from '../../services/aiSenseiService';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAiChats, formatChat, formatMessage } from '../../hooks/useAiChats';
 // import senseiBanner from '../../assets/images/sensei-banner.png';
 
 const AiSensei = () => {
+    const navigate = useNavigate();
+    const { chatId } = useParams();
+    const { chats, setChats, messages, loading: loadingChats, error } = useAiChats(chatId);
     const [input, setInput] = useState('');
     const [activeMode, setActiveMode] = useState('grammar');
     const [loading, setLoading] = useState(false);
-    const [activeChatId, setActiveChatId] = useState(1);
-
-    const [chats, setChats] = useState([]);
 
     const chatEndRef = useRef(null);
     const timerRef = useRef(null);
@@ -77,12 +68,9 @@ const AiSensei = () => {
         },
     ];
 
-    const currentChat = chats.find(chat => chat.id === activeChatId);
-    const messages = currentChat?.messages || [];
-
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages.length, activeChatId]);
+    }, [messages.length, chatId]);
 
     useEffect(() => {
         return () => {
@@ -96,16 +84,7 @@ const AiSensei = () => {
     };
 
     const handleNewChat = () => {
-        const newChat = {
-            id: Date.now(),
-            title: 'Cuộc trò chuyện mới',
-            date: 'Vừa xong',
-            mode: activeMode,
-            messages: [],
-        };
-
-        setChats(prev => [newChat, ...prev]);
-        setActiveChatId(newChat.id);
+        navigate('/sensei');
         setInput('');
     };
 
@@ -113,108 +92,99 @@ const AiSensei = () => {
         message.info('Đang hiển thị toàn bộ lịch sử mẫu');
     };
 
-    const handleDeleteChat = id => {
-        const remaining = chats.filter(chat => chat.id !== id);
-        setChats(remaining);
+    const handleDeleteChat = async id => {
+        try {
+            await deleteChat(id);
 
-        if (activeChatId === id) {
-            setActiveChatId(remaining[0]?.id || null);
+            setChats(prev => prev.filter(chat => chat.id !== id));
+
+            if (chatId === id) {
+                navigate('/sensei', { replace: true });
+            }
+
+            message.success('Đã xóa cuộc trò chuyện');
+        } catch (error) {
+            message.error('Không thể xóa cuộc trò chuyện');
         }
-
-        message.success('Đã xóa cuộc trò chuyện');
     };
 
     //chọn chay bất kì
     const handleSelectChat = id => {
-        setActiveChatId(id);
+        navigate(`/sensei/${id}`);
         setInput('');
     };
 
     const handleSend = async () => {
         const content = input.trim();
 
-        if (!content || loading) return;
+        if (!content || loading || loadingChats) return;
 
-        const chatId = activeChatId ?? crypto.randomUUID();
+        let currentChatId = chatId;
+        const mode = activeMode;
 
-        const existingChat = chats.find(chat => chat.id === chatId);
-
-        const history = (existingChat?.messages ?? []).map(item => ({
-            role: item.role,
-            content: item.content,
-        }));
-
-        const userMessage = {
-            id: crypto.randomUUID(),
-            role: 'user',
-            content,
-            time: new Date().toLocaleTimeString('vi-VN', {
-                hour: '2-digit',
-                minute: '2-digit',
-            }),
-        };
-
-        // 1. Hiển thị tin nhắn user ngay lập tức
-        setChats(prev => {
-            const exists = prev.some(chat => chat.id === chatId);
-
-            if (!exists) {
-                return [
-                    {
-                        id: chatId,
-                        title: content.slice(0, 40),
-                        date: 'Vừa xong',
-                        mode: activeMode,
-                        messages: [userMessage],
-                    },
-                    ...prev,
-                ];
-            }
-
-            return prev.map(chat =>
-                chat.id === chatId
-                    ? {
-                          ...chat,
-                          title: chat.messages.length === 0 ? content.slice(0, 40) : chat.title,
-                          messages: [...chat.messages, userMessage],
-                      }
-                    : chat
-            );
-        });
-
-        setActiveChatId(chatId);
-        setInput('');
         setLoading(true);
+        setInput('');
 
         try {
-            // 2. Gửi request đến Supabase Edge Function
-            const reply = await askAiSensei(content, activeMode, history);
+            // 1. Tạo chat mới nếu chưa có chatId
+            if (!currentChatId) {
+                const newChat = await createChat(content.slice(0, 40));
 
-            // 3. Tạo tin nhắn AI
-            const aiMessage = {
-                id: crypto.randomUUID(),
-                role: 'assistant',
-                content: reply,
-                time: new Date().toLocaleTimeString('vi-VN', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                }),
-            };
+                currentChatId = newChat.id;
 
-            // 4. Hiển thị câu trả lời AI
+                setChats(prev => [formatChat(newChat), ...prev]);
+
+                navigate(`/sensei/${currentChatId}`, {
+                    replace: true,
+                });
+            }
+
+            // 2. Lấy lịch sử chat từ Supabase
+            const oldMessages = await getChatMessages(currentChatId);
+
+            const history = oldMessages.map(item => ({
+                role: item.role,
+                content: item.content,
+            }));
+
+            // 3. Lưu tin nhắn user vào Supabase
+            const userMessage = await saveMessage(currentChatId, 'user', content);
+
+            // 4. Hiển thị tin nhắn user
             setChats(prev =>
                 prev.map(chat =>
-                    chat.id === chatId
+                    chat.id === currentChatId
                         ? {
                               ...chat,
-                              messages: [...chat.messages, aiMessage],
+                              messages: [
+                                  ...oldMessages.map(formatMessage),
+                                  formatMessage(userMessage),
+                              ],
+                          }
+                        : chat
+                )
+            );
+
+            // 5. Gọi Groq AI
+            const reply = await askAiSensei(content, mode, history);
+
+            // 6. Lưu phản hồi AI vào Supabase
+            const aiMessage = await saveMessage(currentChatId, 'assistant', reply);
+
+            // 7. Hiển thị phản hồi AI
+            setChats(prev =>
+                prev.map(chat =>
+                    chat.id === currentChatId
+                        ? {
+                              ...chat,
+                              messages: [...chat.messages, formatMessage(aiMessage)],
                           }
                         : chat
                 )
             );
         } catch (error) {
             console.error('AI Sensei Error:', error);
-            message.error(error.message || 'Không thể kết nối AI Sensei');
+            message.error(error.message || 'Không thể gửi tin nhắn');
         } finally {
             setLoading(false);
         }
@@ -246,10 +216,9 @@ const AiSensei = () => {
                 />
 
                 {/* CHAT HISTORY */}
-                {/* CHAT HISTORY */}
                 <ChatHistory
                     chats={chats}
-                    activeChatId={activeChatId}
+                    activeChatId={chatId}
                     handleNewChat={handleNewChat}
                     handleDeleteChat={handleDeleteChat}
                     handleSelectChat={handleSelectChat}

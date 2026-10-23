@@ -24,6 +24,7 @@ const AppRoutes = () => {
                     <Route path="/home" element={<Home />} />
                     <Route path="/account" element={<Account />} />
                     <Route path="/sensei" element={<AiSensei />} />
+                    <Route path="/sensei/:chatId" element={<AiSensei />} />
                 </Route>
             </Route>
 

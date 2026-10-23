@@ -4,7 +4,7 @@ import { LuPlus, LuMessageCircle, LuTrash2, LuChevronRight } from 'react-icons/l
 
 const ChatHistory = ({
     chats,
-    activeChatId,
+    chatId,
     handleNewChat,
     handleDeleteChat,
     handleSelectChat,
@@ -37,7 +37,7 @@ const ChatHistory = ({
                             key={chat.id}
                             onClick={() => handleSelectChat(chat.id)}
                             className={`group flex cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition-colors ${
-                                activeChatId === chat.id ? 'bg-[#eaf1ff]' : 'hover:bg-[#f6f8fc]'
+                                chatId === chat.id ? 'bg-[#eaf1ff]' : 'hover:bg-[#f6f8fc]'
                             }`}
                         >
                             <LuMessageCircle size={19} className="shrink-0 text-[#526786]" />
