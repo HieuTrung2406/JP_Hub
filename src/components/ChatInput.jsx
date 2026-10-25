@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Input } from 'antd';
 import { LuSend } from 'react-icons/lu';
 
+import vi from '../locales/vi';
+
 const ChatInput = ({ input, setInput, loading, handleSend }) => {
     return (
         <div className="shrink-0 border-t border-[#e8eef8] bg-white p-4">
@@ -11,7 +13,7 @@ const ChatInput = ({ input, setInput, loading, handleSend }) => {
                     <Input.TextArea
                         value={input}
                         onChange={e => setInput(e.target.value)}
-                        placeholder="Nhập câu hỏi tiếng Nhật của bạn..."
+                        placeholder={vi.chatInput.placeholder}
                         autoSize={{ minRows: 1, maxRows: 4 }}
                         variant="borderless"
                         className="!min-h-[42px] !w-full !resize-none !px-3 !py-[10px] !text-[14px] !leading-[22px]"

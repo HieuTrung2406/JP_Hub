@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { message } from 'antd';
-import { LuBookOpen, LuFileQuestion, LuPencil, LuMessagesSquare } from 'react-icons/lu';
-
-// Thay bằng đường dẫn ảnh trong project của bạn
 import ChatInput from '../../components/ChatInput';
 import StudyModes from '../../components/StudyModes';
 import ChatHistory from '../../components/ChatHistory';
@@ -16,7 +13,7 @@ import {
 } from '../../services/aiSenseiService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAiChats, formatChat, formatMessage } from '../../hooks/useAiChats';
-// import senseiBanner from '../../assets/images/sensei-banner.png';
+import vi from '../../locales/vi';
 
 const AiSensei = () => {
     const navigate = useNavigate();
@@ -25,48 +22,8 @@ const AiSensei = () => {
     const [input, setInput] = useState('');
     const [activeMode, setActiveMode] = useState('grammar');
     const [loading, setLoading] = useState(false);
-
     const chatEndRef = useRef(null);
     const timerRef = useRef(null);
-
-    const modes = [
-        {
-            key: 'grammar',
-            title: 'Giải thích ngữ pháp',
-            description: 'Hỏi về cách dùng, so sánh ngữ pháp...',
-            icon: <LuBookOpen size={24} />,
-            color: '#3977f6',
-            bg: '#eff5ff',
-            prompt: 'Giải thích giúp tôi ngữ pháp ～わりに kèm ví dụ.',
-        },
-        {
-            key: 'jlpt',
-            title: 'Giải bài JLPT',
-            description: 'Phân tích đáp án, giải thích chi tiết...',
-            icon: <LuFileQuestion size={24} />,
-            color: '#a276f5',
-            bg: '#f6f0ff',
-            prompt: 'Hãy giải thích câu hỏi JLPT sau:\n',
-        },
-        {
-            key: 'correct',
-            title: 'Sửa câu tiếng Nhật',
-            description: 'Kiểm tra và sửa lỗi diễn đạt tự nhiên...',
-            icon: <LuPencil size={24} />,
-            color: '#3985f6',
-            bg: '#eff6ff',
-            prompt: 'Hãy sửa câu tiếng Nhật sau và giải thích lỗi:\n',
-        },
-        {
-            key: 'kaiwa',
-            title: 'Luyện hội thoại',
-            description: 'Đóng vai tình huống thực tế...',
-            icon: <LuMessagesSquare size={24} />,
-            color: '#3f7af5',
-            bg: '#eff5ff',
-            prompt: 'Hãy đóng vai người phỏng vấn IT Nhật Bản.',
-        },
-    ];
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -89,7 +46,7 @@ const AiSensei = () => {
     };
 
     const handleViewMore = () => {
-        message.info('Đang hiển thị toàn bộ lịch sử mẫu');
+        message.info(vi.aiSensei.viewMoreInfo);
     };
 
     const handleDeleteChat = async id => {
@@ -102,13 +59,13 @@ const AiSensei = () => {
                 navigate('/sensei', { replace: true });
             }
 
-            message.success('Đã xóa cuộc trò chuyện');
+            message.success(vi.aiSensei.deleteChatSuccess);
         } catch (error) {
-            message.error('Không thể xóa cuộc trò chuyện');
+            message.error(vi.aiSensei.deleteChatFailed);
         }
     };
 
-    //chọn chay bất kì
+    //chọn chat bất kì
     const handleSelectChat = id => {
         navigate(`/sensei/${id}`);
         setInput('');
@@ -183,8 +140,7 @@ const AiSensei = () => {
                 )
             );
         } catch (error) {
-            console.error('AI Sensei Error:', error);
-            message.error(error.message || 'Không thể gửi tin nhắn');
+            message.error(error.message || vi.aiSensei.sendMessageFailed);
         } finally {
             setLoading(false);
         }
@@ -209,11 +165,7 @@ const AiSensei = () => {
             {/* RIGHT SIDEBAR */}
             <div className="flex w-[340px] shrink-0 flex-col gap-4 overflow-hidden">
                 {/* STUDY MODES */}
-                <StudyModes
-                    modes={modes}
-                    activeMode={activeMode}
-                    handleSelectMode={handleSelectMode}
-                />
+                <StudyModes activeMode={activeMode} handleSelectMode={handleSelectMode} />
 
                 {/* CHAT HISTORY */}
                 <ChatHistory

@@ -47,6 +47,21 @@ const vi = {
         emailConfirmation: 'Vui lòng kiểm tra email để xác nhận tài khoản.',
     },
 
+    account: {
+        title: 'Tài khoản của tôi',
+        description: 'Thông tin tài khoản của bạn trên Nihongo-hub.',
+        displayName: 'Display name',
+        email: 'Email',
+        phone: 'Phone',
+        providers: 'Providers',
+        providerType: 'Provider type',
+        createdAt: 'Created at',
+        defaultName: 'Chưa cập nhật',
+        emptyValue: '—',
+        loadUserFailed: 'Không thể tải thông tin tài khoản',
+        userNotFound: 'Không tìm thấy thông tin tài khoản.',
+    },
+
     hero: {
         badge: 'HỌC TIẾNG NHẬT MỖI NGÀY',
         title: 'JLPT Vocabulary Flashcards',
@@ -114,6 +129,15 @@ const vi = {
         userAvatar: 'H',
         userAccount: 'Tài khoản học viên',
         userStatus: 'Đang học JLPT',
+        nav: {
+            home: 'Tổng quan',
+            flashcard: 'Flashcard',
+            vocabulary: 'Từ vựng',
+            grammar: 'Ngữ pháp',
+            exam: 'Luyện đề JLPT',
+            sensei: 'AI Sensei',
+            account: 'Tài khoản',
+        },
     },
 
     topBar: {
@@ -125,6 +149,74 @@ const vi = {
         logout: 'Đăng xuất',
         logoutSuccess: 'Đăng xuất thành công!',
         logoutFailed: 'Đăng xuất thất bại. Vui lòng thử lại!',
+    },
+
+    chatMessages: {
+        welcomeTitle: 'こんにちは！ Hôm nay bạn muốn học gì?',
+        welcomeDescription:
+            'Hãy nhập câu hỏi tiếng Nhật hoặc chọn một chế độ học ở bên phải để bắt đầu cùng Sensei nhé!',
+        welcomeBadge: 'Sensei luôn sẵn sàng giúp bạn học tiếng Nhật',
+        assistantName: 'AI Sensei',
+        userAvatar: 'N',
+        copy: 'Sao chép',
+        helpful: 'Hữu ích',
+        notHelpful: 'Chưa hữu ích',
+        thinking: 'Sensei đang suy nghĩ...',
+    },
+
+    chatInput: {
+        placeholder: 'Nhập câu hỏi tiếng Nhật của bạn...',
+    },
+
+    studyModes: {
+        title: 'Chế độ học',
+        subtitle: '(Gợi ý nhanh)',
+
+        grammar: {
+            title: 'Giải thích ngữ pháp',
+            description: 'Hỏi về cách dùng, so sánh ngữ pháp...',
+            prompt: 'Giải thích giúp tôi ngữ pháp ～わりに kèm ví dụ.',
+        },
+
+        jlpt: {
+            title: 'Giải bài JLPT',
+            description: 'Phân tích đáp án, giải thích chi tiết...',
+            prompt: 'Hãy giải thích câu hỏi JLPT sau:\n',
+        },
+
+        correct: {
+            title: 'Sửa câu tiếng Nhật',
+            description: 'Kiểm tra và sửa lỗi diễn đạt tự nhiên...',
+            prompt: 'Hãy sửa câu tiếng Nhật sau và giải thích lỗi:\n',
+        },
+
+        kaiwa: {
+            title: 'Luyện hội thoại',
+            description: 'Đóng vai tình huống thực tế...',
+            prompt: 'Hãy đóng vai người phỏng vấn IT Nhật Bản.',
+        },
+    },
+
+    chatHistory: {
+        title: 'Lịch sử hội thoại',
+        newChat: 'Chat mới',
+        emptyChat: 'Chưa có cuộc trò chuyện',
+        deleteChat: 'Xóa hội thoại',
+        viewMore: 'Xem thêm',
+    },
+
+    aiSensei: {
+        viewMoreInfo: 'Đang hiển thị toàn bộ lịch sử mẫu',
+        deleteChatSuccess: 'Đã xóa cuộc trò chuyện',
+        deleteChatFailed: 'Không thể xóa cuộc trò chuyện',
+        sendMessageFailed: 'Không thể gửi tin nhắn',
+    },
+
+    home: {
+        saveProgressFailed: 'Không thể lưu tiến độ học',
+        shuffleSuccess: 'Đã trộn thẻ!',
+        speechNotSupported: 'Trình duyệt chưa hỗ trợ phát âm.',
+        loadVocabularyFailed: 'Không thể tải danh sách từ vựng. Vui lòng thử lại!',
     },
 };
 

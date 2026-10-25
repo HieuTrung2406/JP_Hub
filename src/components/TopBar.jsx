@@ -71,9 +71,11 @@ export default function TopBar({ setMobileMenu }) {
                     type="button"
                     className="flex cursor-pointer items-center gap-2 rounded-full border border-slate-100 bg-white px-3 py-1.5 shadow-sm transition-all duration-200 hover:border-blue-200 hover:shadow-md"
                 >
-                    <Avatar size={27} className="!bg-[#e6edff] !text-[#3266d5]">
-                        {vi.topBar.userAvatar}
-                    </Avatar>
+                    <Avatar
+                        size={27}
+                        icon={<LuUserRound size={16} />}
+                        className="!flex !items-center !justify-center !bg-[#e6edff] !text-[#3266d5]"
+                    />
 
                     <span className="text-xs font-semibold text-slate-700">
                         {vi.topBar.userRole}

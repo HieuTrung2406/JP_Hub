@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Empty, Tooltip } from 'antd';
 import { LuPlus, LuMessageCircle, LuTrash2, LuChevronRight } from 'react-icons/lu';
 
+import vi from '../locales/vi';
+
 const ChatHistory = ({
     chats,
     chatId,
@@ -13,7 +15,7 @@ const ChatHistory = ({
     return (
         <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-[#e6edf8] bg-white p-4 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-2">
-                <h3 className="text-[15px] font-bold text-[#152b4f]">Lịch sử hội thoại</h3>
+                <h3 className="text-[15px] font-bold text-[#152b4f]">{vi.chatHistory.title}</h3>
 
                 <Button
                     type="primary"
@@ -21,14 +23,14 @@ const ChatHistory = ({
                     onClick={handleNewChat}
                     className="!h-9 !rounded-lg !bg-[#3977f6] !text-[12px]"
                 >
-                    Chat mới
+                    {vi.chatHistory.newChat}
                 </Button>
             </div>
 
             <div className="min-h-0 flex-1 space-y-2 overflow-y-auto pr-1">
                 {chats.length === 0 ? (
                     <Empty
-                        description="Chưa có cuộc trò chuyện"
+                        description={vi.chatHistory.emptyChat}
                         image={Empty.PRESENTED_IMAGE_SIMPLE}
                     />
                 ) : (
@@ -50,7 +52,7 @@ const ChatHistory = ({
                                 <p className="mt-1 text-[11px] text-slate-400">{chat.date}</p>
                             </div>
 
-                            <Tooltip title="Xóa hội thoại">
+                            <Tooltip title={vi.chatHistory.deleteChat}>
                                 <button
                                     onClick={e => {
                                         e.stopPropagation();
@@ -70,7 +72,8 @@ const ChatHistory = ({
                 onClick={handleViewMore}
                 className="mt-3 flex items-center justify-center gap-1 border-t border-slate-100 pt-3 text-[12px] font-medium text-[#3977f6] hover:underline"
             >
-                Xem thêm <LuChevronRight size={15} />
+                {vi.chatHistory.viewMore}
+                <LuChevronRight size={15} />
             </button>
         </div>
     );

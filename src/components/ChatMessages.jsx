@@ -4,6 +4,7 @@ import { LuSparkles, LuCopy, LuThumbsUp, LuThumbsDown } from 'react-icons/lu';
 
 import senseiAvatar from '../assets/sensei-avatar.png';
 import MessageContent from './MessageContent';
+import vi from '../locales/vi';
 
 const ChatMessages = ({ messages, loading, chatEndRef }) => {
     return (
@@ -17,17 +18,16 @@ const ChatMessages = ({ messages, loading, chatEndRef }) => {
                     />
 
                     <h2 className="mt-5 text-[22px] font-bold text-[#142b50]">
-                        こんにちは！ Hôm nay bạn muốn học gì?
+                        {vi.chatMessages.welcomeTitle}
                     </h2>
 
                     <p className="mt-2 max-w-[450px] text-[14px] leading-6 text-slate-500">
-                        Hãy nhập câu hỏi tiếng Nhật hoặc chọn một chế độ học ở bên phải để bắt đầu
-                        cùng Sensei nhé!
+                        {vi.chatMessages.welcomeDescription}
                     </p>
 
                     <div className="mt-5 flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-[13px] text-blue-600">
                         <LuSparkles />
-                        Sensei luôn sẵn sàng giúp bạn học tiếng Nhật
+                        {vi.chatMessages.welcomeBadge}
                     </div>
                 </div>
             ) : (
@@ -45,7 +45,7 @@ const ChatMessages = ({ messages, loading, chatEndRef }) => {
                                     </div>
 
                                     <Avatar size={34} className="shrink-0 bg-[#5688f4]">
-                                        N
+                                        {vi.chatMessages.userAvatar}
                                     </Avatar>
                                 </div>
                             ) : (
@@ -59,7 +59,7 @@ const ChatMessages = ({ messages, loading, chatEndRef }) => {
                                     <div className="min-w-0 flex-1">
                                         <div className="mb-2 flex items-center gap-2">
                                             <span className="text-[13px] font-bold text-[#152b4f]">
-                                                AI Sensei
+                                                {vi.chatMessages.assistantName}
                                             </span>
 
                                             <span className="text-[11px] text-slate-400">
@@ -71,19 +71,19 @@ const ChatMessages = ({ messages, loading, chatEndRef }) => {
                                             <MessageContent content={msg.content} />
 
                                             <div className="mt-4 flex gap-3 border-t border-slate-100 pt-3 text-slate-400">
-                                                <Tooltip title="Sao chép">
+                                                <Tooltip title={vi.chatMessages.copy}>
                                                     <button className="hover:text-blue-500">
                                                         <LuCopy size={15} />
                                                     </button>
                                                 </Tooltip>
 
-                                                <Tooltip title="Hữu ích">
+                                                <Tooltip title={vi.chatMessages.helpful}>
                                                     <button className="hover:text-blue-500">
                                                         <LuThumbsUp size={15} />
                                                     </button>
                                                 </Tooltip>
 
-                                                <Tooltip title="Chưa hữu ích">
+                                                <Tooltip title={vi.chatMessages.notHelpful}>
                                                     <button className="hover:text-red-500">
                                                         <LuThumbsDown size={15} />
                                                     </button>
@@ -101,7 +101,7 @@ const ChatMessages = ({ messages, loading, chatEndRef }) => {
                             <Avatar src={senseiAvatar} size={34} />
 
                             <div className="rounded-xl border bg-white px-4 py-3 text-[13px] text-slate-500">
-                                <span className="animate-pulse">Sensei đang suy nghĩ...</span>
+                                <span className="animate-pulse">{vi.chatMessages.thinking}</span>
                             </div>
                         </div>
                     )}
