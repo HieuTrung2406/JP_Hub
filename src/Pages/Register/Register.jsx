@@ -12,7 +12,6 @@ export default function Register() {
 
     const handleRegister = async values => {
         setLoading(true);
-
         try {
             const data = await registerUser(values.fullName, values.email, values.password);
 

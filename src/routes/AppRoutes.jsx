@@ -7,6 +7,7 @@ import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 import MainLayout from '../components/MainLayout';
 import Account from '../Pages/Account/Account';
+import AiSensei from '../Pages/AiSensei/AiSensei';
 
 const AppRoutes = () => {
     return (
@@ -22,6 +23,8 @@ const AppRoutes = () => {
                 <Route element={<MainLayout />}>
                     <Route path="/home" element={<Home />} />
                     <Route path="/account" element={<Account />} />
+                    <Route path="/sensei" element={<AiSensei />} />
+                    <Route path="/sensei/:chatId" element={<AiSensei />} />
                 </Route>
             </Route>
 

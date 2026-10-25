@@ -10,99 +10,7 @@ import {
     getVocabularyProgress,
     saveVocabularyProgress,
 } from '../../services/vocabularyService';
-
-const MOCK_VOCABULARY = [
-    {
-        id: 1,
-        word: '経験',
-        reading: 'けいけん',
-        meaning: 'Kinh nghiệm',
-        example: '日本で働いた経験があります。',
-        exampleMeaning: 'Tôi có kinh nghiệm làm việc tại Nhật.',
-        level: 'N3',
-    },
-    {
-        id: 2,
-        word: '確認',
-        reading: 'かくにん',
-        meaning: 'Xác nhận, kiểm tra',
-        example: 'メールを確認してください。',
-        exampleMeaning: 'Hãy kiểm tra email.',
-        level: 'N3',
-    },
-    {
-        id: 3,
-        word: '約束',
-        reading: 'やくそく',
-        meaning: 'Lời hứa, cuộc hẹn',
-        example: '友達と約束があります。',
-        exampleMeaning: 'Tôi có hẹn với bạn.',
-        level: 'N3',
-    },
-    {
-        id: 4,
-        word: '準備',
-        reading: 'じゅんび',
-        meaning: 'Chuẩn bị',
-        example: '旅行の準備をしています。',
-        exampleMeaning: 'Tôi đang chuẩn bị cho chuyến du lịch.',
-        level: 'N3',
-    },
-    {
-        id: 5,
-        word: '問題',
-        reading: 'もんだい',
-        meaning: 'Vấn đề, câu hỏi',
-        example: 'この問題は難しいです。',
-        exampleMeaning: 'Vấn đề này khó.',
-        level: 'N3',
-    },
-    {
-        id: 6,
-        word: '学校',
-        reading: 'がっこう',
-        meaning: 'Trường học',
-        example: '毎日学校へ行きます。',
-        exampleMeaning: 'Tôi đến trường mỗi ngày.',
-        level: 'N5',
-    },
-    {
-        id: 7,
-        word: '先生',
-        reading: 'せんせい',
-        meaning: 'Giáo viên',
-        example: '先生は優しいです。',
-        exampleMeaning: 'Giáo viên rất tốt bụng.',
-        level: 'N5',
-    },
-    {
-        id: 8,
-        word: '予定',
-        reading: 'よてい',
-        meaning: 'Dự định, lịch trình',
-        example: '明日の予定を教えてください。',
-        exampleMeaning: 'Hãy cho tôi biết lịch trình ngày mai.',
-        level: 'N4',
-    },
-    {
-        id: 9,
-        word: '改善',
-        reading: 'かいぜん',
-        meaning: 'Cải thiện',
-        example: '仕事の方法を改善します。',
-        exampleMeaning: 'Tôi cải thiện phương pháp làm việc.',
-        level: 'N2',
-    },
-    {
-        id: 10,
-        word: '概念',
-        reading: 'がいねん',
-        meaning: 'Khái niệm',
-        example: 'この概念を理解するのは難しい。',
-        exampleMeaning: 'Khái niệm này khó hiểu.',
-        level: 'N1',
-    },
-];
+import vi from '../../locales/vi';
 
 const shuffleArray = array => {
     const result = [...array];
@@ -120,7 +28,7 @@ export default function Home() {
     const [flipped, setFlipped] = useState(false);
     const [unknownIds, setUnknownIds] = useState([]);
     const [knownIds, setKnownIds] = useState([]);
-    const [order, setOrder] = useState(MOCK_VOCABULARY.map(w => w.id));
+    const [order, setOrder] = useState([]);
 
     // State lấy data
     const [vocabulary, setVocabulary] = useState([]);
@@ -194,7 +102,7 @@ export default function Home() {
             }
         } catch (error) {
             console.error(error);
-            message.error('Không thể lưu tiến độ học');
+            message.error(vi.home.saveProgressFailed);
         }
     };
 
@@ -209,13 +117,13 @@ export default function Home() {
     const shuffle = () => {
         setOrder(prev => shuffleArray(prev));
         resetCard();
-        message.success('Đã trộn thẻ!');
+        message.success(vi.home.shuffleSuccess);
     };
 
     const speak = event => {
         event?.stopPropagation();
         if (!current || !('speechSynthesis' in window)) {
-            message.warning('Trình duyệt chưa hỗ trợ phát âm.');
+            message.warning(vi.home.speechNotSupported);
             return;
         }
         window.speechSynthesis.cancel();
@@ -224,28 +132,6 @@ export default function Home() {
         utterance.rate = 0.85;
         window.speechSynthesis.speak(utterance);
     };
-
-    // useEffect(() => {
-    //     const onKeyDown = e => {
-    //         if (
-    //             e.target instanceof HTMLElement &&
-    //             (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
-    //                 e.target.isContentEditable)
-    //         )
-    //             return;
-
-    //         if (e.code === 'Space') {
-    //             e.preventDefault();
-    //             setFlipped(v => !v);
-    //         } else if (e.code === 'ArrowRight') {
-    //             next();
-    //         } else if (e.code === 'ArrowLeft') {
-    //             previous();
-    //         }
-    //     };
-    //     window.addEventListener('keydown', onKeyDown);
-    //     return () => window.removeEventListener('keydown', onKeyDown);
-    // });
 
     useEffect(() => {
         let active = true;
@@ -287,7 +173,7 @@ export default function Home() {
                 setFlipped(false);
             } catch (error) {
                 if (active) {
-                    console.error('Fetch data error:', error);
+                    message.error(vi.home.loadVocabularyFailed);
                 }
             }
         };
