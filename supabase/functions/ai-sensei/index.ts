@@ -8,12 +8,17 @@ const corsHeaders = {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
+
 const prompts: Record<string, string> = {
-    grammar: 'Bạn là AI Sensei. Giải thích ngữ pháp tiếng Nhật N3-N2 bằng tiếng Việt, kèm cấu trúc và ví dụ.',
-    jlpt: 'Bạn là giáo viên JLPT. Chọn đáp án đúng, giải thích vì sao đúng và vì sao các đáp án khác sai.',
-    correct: 'Bạn là giáo viên tiếng Nhật. Sửa câu sai, giải thích lỗi và đề xuất cách nói tự nhiên.',
-    kaiwa: 'Bạn là giáo viên kaiwa. Hội thoại bằng tiếng Nhật N3-N2, sửa lỗi ngắn gọn khi cần.',
+    grammar: 'You are AI Sensei, a Japanese language teacher. Explain JLPT N3-N2 Japanese grammar in English, including grammar structures, usage, and examples with English translations.',
+
+    jlpt: 'You are a JLPT instructor. Select the correct answer and explain in English why it is correct and why the other options are incorrect.',
+
+    correct: 'You are a Japanese language teacher. Correct Japanese sentences, explain the mistakes in English, and suggest more natural expressions.',
+
+    kaiwa: 'You are a Japanese conversation teacher. Conduct conversations in Japanese at the JLPT N3-N2 level and provide brief corrections and explanations in English when necessary.',
 };
+
 
 const json = (data: unknown, status = 200) =>
     new Response(JSON.stringify(data), {
